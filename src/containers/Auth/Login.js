@@ -1,39 +1,61 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { push } from "connected-react-router";
+// import * as actions from "../store/actions";
 import * as actions from "../../store/actions";
 import "./Login.scss";
+import { FormattedMessage } from "react-intl";
+import { handleLoginApi } from "../../services/userService";
+
 class Login extends Component {
   constructor(props) {
     super(props);
-      this.state ={
-          username : "",
-          password : "",
-          isShowPassword: false,
+
+    this.state = {
+      username: "",
+      password: "",
+      isShowPassword: false,
+      errMessage: "",
+    };
+  }
+
+  handlerOnchageUserName = (event) => {
+    this.setState({ username: event.target.value });
+  };
+  handlerOnchagePassword = (event) => {
+    this.setState({ password: event.target.value });
+  };
+
+  handleLogin = async () => {
+    this.setState({ errMessage: "" });
+
+    try {
+      let data = await handleLoginApi(this.state.username, this.state.password);
+    
+      if (data && data.errcode !== 0) {
+        this.setState({ errMessage: data.message });
       }
-  }
-  handleOnchangeUserName = (e) =>{
-              this.setState({
-                  username : e.target.value
-              })
-              
-  }
-  handleOnchangePassword = (e) =>{
-              this.setState({
-                password : e.target.value
-              })
-              
-  }
-  handleOnSubmit = ()=>{
-      
-       console.log(this.state)
-  }
+      if (data && data.errcode === 0) {
+        this.props.userLoginSuccess(data.user);
+        console.log("login");
+      }
+    } catch (error) {
+      if (error.response) {
+        if (error.response.data) {
+          this.setState({ errMessage: error.response.data.message });
+        }
+        console.log(error.response,"tuyen")
+      }
+    }
+  };
 
   HandlerShowHidepassword = () => {
     this.setState({ isShowPassword: !this.state.isShowPassword });
   };
 
   render() {
+    //JSX
+
     return (
       <div className="login-background">
         <div className="login-container">
@@ -45,8 +67,10 @@ class Login extends Component {
                 type="text"
                 className="form-control"
                 placeholder="Enter your usename"
-                value ={this.state.username}
-                onChange={(event)=>{this.handleOnchangeUserName(event)}}
+                value={this.state.username}
+                onChange={(event) => {
+                  this.handlerOnchageUserName(event);
+                }}
               />
             </div>
             <div className="col-12 form-group login-input">
@@ -54,14 +78,15 @@ class Login extends Component {
 
               <div>
                 <input
-                  
+                  type={this.state.isShowPassword ? "text" : "password"}
                   className="form-control"
                   placeholder="Enter your password"
-                  type={this.state.isShowPassword?"text":"password"}
-                  value ={this.state.password}
-                  onChange={(event)=>{this.handleOnchangePassword(event)}}
+                  value={this.state.password}
+                  onChange={(event) => {
+                    this.handlerOnchagePassword(event);
+                  }}
                 />
-               <span
+                <span
                   onClick={() => {
                     this.HandlerShowHidepassword();
                   }}
@@ -77,10 +102,15 @@ class Login extends Component {
               </div>
             </div>
             <div className="col-12" style={{ color: "red" }}>
-             
+              {this.state.errMessage}
             </div>
             <div className="col-12">
-              <button class="btn-login" onClick={()=>{this.handleOnSubmit()}}>
+              <button
+                class="btn-login"
+                onClick={() => {
+                  this.handleLogin();
+                }}
+              >
                 Login
               </button>
             </div>
@@ -101,19 +131,18 @@ class Login extends Component {
   }
 }
 
-//ReDux
 const mapStateToProps = (state) => {
   return {
-    lang: state.app.language,
+    langquage: state.app.language,
   };
 };
 
 const mapDispatchToProps = (dispatch) => {
   return {
     navigate: (path) => dispatch(push(path)),
-    adminLoginSuccess: (adminInfo) =>
-      dispatch(actions.adminLoginSuccess(adminInfo)),
-    adminLoginFail: () => dispatch(actions.adminLoginFail()),
+    // userLoginFail: () => dispatch(actions.adminLoginFail()),
+    userLoginSuccess: (userInfo) =>
+      dispatch(actions.userLoginSuccess(userInfo)),
   };
 };
 
