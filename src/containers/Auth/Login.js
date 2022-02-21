@@ -36,14 +36,12 @@ class Login extends Component {
       }
       if (data && data.errcode === 0) {
         this.props.userLoginSuccess(data.user);
-        console.log("login");
       }
     } catch (error) {
       if (error.response) {
         if (error.response.data) {
           this.setState({ errMessage: error.response.data.message });
         }
-        console.log(error.response,"tuyen")
       }
     }
   };
@@ -89,7 +87,7 @@ class Login extends Component {
                   }}
                 >
                   <i
-                    class={
+                    className={
                       this.state.isShowPassword
                         ? "far fa-eye"
                         : "far fa-eye-slash"
@@ -103,7 +101,7 @@ class Login extends Component {
             </div>
             <div className="col-12">
               <button
-                class="btn-login"
+                className="btn-login"
                 onClick={() => {
                   this.handleLogin();
                 }}
