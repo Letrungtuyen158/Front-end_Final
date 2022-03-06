@@ -1,10 +1,13 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { Modal, ModalHeader, ModalBody, ModalFooter, Button } from "reactstrap";
+import _ from "lodash";
+
 class ModalEditUser extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      id: "",
       email: "",
       password: "",
       firstName: "",
@@ -13,7 +16,19 @@ class ModalEditUser extends Component {
     };
   }
 
-  componentDidMount() {}
+  componentDidMount() {
+    let user = this.props.currentUser;
+    if (user && !_.isEmpty(user)) {
+      this.setState({
+        id: user.id,
+        email: user.email,
+        password: "hardcode",
+        firstName: user.firstName,
+        lastName: user.lastName,
+        address: user.address,
+      });
+    }
+  }
   toggle = () => {
     this.props.toggleUserModal();
   };
@@ -37,11 +52,11 @@ class ModalEditUser extends Component {
 
     return isValue;
   };
-  handleOnSubmit = () => {
+  handleSaveUser = () => {
     let isValid = this.checkValidate();
     if (isValid === true) {
       //call api create use
-      this.props.createNewUser(this.state);
+      this.props.editUser(this.state);
     }
   };
   render() {
@@ -72,6 +87,7 @@ class ModalEditUser extends Component {
                   this.handleOnChangeInput(event, "email");
                 }}
                 value={this.state.email}
+                disabled
               />
             </div>
             <div className="input-container">
@@ -82,6 +98,7 @@ class ModalEditUser extends Component {
                   this.handleOnChangeInput(event, "password");
                 }}
                 value={this.state.password}
+                disabled
               />
             </div>
             <div className="input-container">
@@ -121,10 +138,10 @@ class ModalEditUser extends Component {
             color="primary"
             className="px-3"
             onClick={() => {
-              this.handleOnSubmit();
+              this.handleSaveUser();
             }}
           >
-            SAVE
+            SAVE Change
           </Button>{" "}
           <Button
             onClick={() => {

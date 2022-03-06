@@ -5,6 +5,7 @@ import {
   getAllUsers,
   createNewUserService,
   deleteUserService,
+  editUserService,
 } from "../../services/userService";
 import ModalUser from "./ModalUser";
 import ModalEditUser from "./ModalEditUser";
@@ -81,6 +82,21 @@ class UserManage extends Component {
       userEdit: user,
     });
   };
+  doEdituser = async (user) => {
+    try {
+      let res = await editUserService(user);
+      if (res && res.errCode === 0) {
+        this.setState({
+          isOpenModalEditUser: false,
+        });
+        await this.getAllUsers();
+      } else {
+        alert(res.errCode);
+      }
+    } catch (e) {
+      console.log(e);
+    }
+  };
 
   render() {
     let arrUsers = this.state.arrUsers;
@@ -91,11 +107,15 @@ class UserManage extends Component {
           toggleUserModal={this.toggleUserModal}
           createNewUser={this.createNewUser}
         />
-        <ModalEditUser
-          isOpen={this.state.isOpenModalEditUser}
-          toggleUserModal={this.toggleUserEditModal}
-          EditNewUser={this.state.userEdit}
-        />
+        {this.state.isOpenModalEditUser && (
+          <ModalEditUser
+            isOpen={this.state.isOpenModalEditUser}
+            toggleUserModal={this.toggleUserEditModal}
+            currentUser={this.state.userEdit}
+            editUser={this.doEdituser}
+          />
+        )}
+
         <div className="title text-center">Manage Users</div>
         <div className="mx-1">
           <button

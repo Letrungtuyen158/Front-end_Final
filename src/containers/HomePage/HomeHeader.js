@@ -42,7 +42,8 @@ class HomeHeader extends Component {
                 {" "}
                 <i className="fas fa-question-circle">Hỗ trợ</i>
               </div>
-              <div className="flag">VN</div>
+              <div className="langguage-vi active">VN</div>
+              <div className="langguage-en active">EN</div>
             </div>
           </div>
         </div>
