@@ -26,27 +26,27 @@ class MedicalFacility extends Component {
             <Slider {...settings}>
               <div className="MedicalFacility-customize">
                 <div className="bg-image" />
-                <div>Bệnh viện đà nẵng</div>
+                <h4>Bệnh viện đà nẵng</h4>
               </div>
               <div className="MedicalFacility-customize">
                 <div className="bg-image" />
-                <div>Bệnh viên hữu nghị việt đức</div>
+                <h4>Bệnh viên hữu nghị việt đức</h4>
               </div>
               <div className="MedicalFacility-customize">
                 <div className="bg-image" />
-                <div>Bệnh viện FPT</div>
+                <h4>Bệnh viện FPT</h4>
               </div>
               <div className="MedicalFacility-customize">
                 <div className="bg-image" />
-                <div>Bệnh viện y học dược1</div>
+                <h4>Bệnh viện y học dược1</h4>
               </div>
               <div className="MedicalFacility-customize">
                 <div className="bg-image" />
-                <div>Bệnh viện U bướu</div>
+                <h4>Bệnh viện U bướu</h4>
               </div>
               <div className="MedicalFacility-customize">
                 <div className="bg-image" />
-                <div>Bệnh viện sản nhi</div>
+                <h4>Bệnh viện sản nhi</h4>
               </div>
             </Slider>
           </div>

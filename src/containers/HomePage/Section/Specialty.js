@@ -26,27 +26,27 @@ class Specialty extends Component {
             <Slider {...settings}>
               <div className="specialty-customize">
                 <div className="bg-image" />
-                <div>cơ xương khớp</div>
+                <h4>cơ xương khớp</h4>
               </div>
               <div className="specialty-customize">
                 <div className="bg-image" />
-                <div>cơ xương khớp</div>
+                <h4>cơ xương khớp</h4>
               </div>
               <div className="specialty-customize">
                 <div className="bg-image" />
-                <div>cơ xương khớp</div>
+                <h4>cơ xương khớp</h4>
               </div>
               <div className="specialty-customize">
                 <div className="bg-image" />
-                <div>cơ xương khớp</div>
+                <h4>cơ xương khớp</h4>
               </div>
               <div className="specialty-customize">
                 <div className="bg-image" />
-                <div>cơ xương khớp</div>
+                <h4>cơ xương khớp</h4>
               </div>
               <div className="specialty-customize">
                 <div className="bg-image" />
-                <div>cơ xương khớp</div>
+                <h4>cơ xương khớp</h4>
               </div>
             </Slider>
           </div>

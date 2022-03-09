@@ -26,33 +26,35 @@ class OutstandingDoctor extends Component {
             <Slider {...settings}>
               <div className="OutstandingDoctor-customize">
                 <div className="bg-image" />
-                <div>Bệnh viện đà nẵng</div>
-                <div>Cơ xương khớp</div>
+                <div className="">
+                  <h4>Bệnh viện đà nẵng</h4>
+                  <p>Cơ xương khớp</p>
+                </div>
               </div>
               <div className="OutstandingDoctor-customize">
                 <div className="bg-image" />
-                <div>Bệnh viên hữu nghị việt đức</div>
-                <div>Da liễu</div>
+                <h4>Bệnh viên hữu nghị việt đức</h4>
+                <p>Da liễu</p>
               </div>
               <div className="OutstandingDoctor-customize">
                 <div className="bg-image" />
-                <div>Bệnh viện FPT</div>
-                <div>Sức khỏe tâm thần</div>
+                <h4>Bệnh viện FPT</h4>
+                <p>Sức khỏe tâm thần</p>
               </div>
               <div className="OutstandingDoctor-customize">
                 <div className="bg-image" />
-                <div>Bệnh viện y học dược1</div>
-                <div>Thần kinh</div>
+                <h4>Bệnh viện y học dược1</h4>
+                <p>Thần kinh</p>
               </div>
               <div className="OutstandingDoctor-customize">
                 <div className="bg-image" />
-                <div>Bệnh viện U bướu</div>
-                <div>Khoa sản phụ</div>
+                <h4>Bệnh viện U bướu</h4>
+                <p>Khoa sản phụ</p>
               </div>
               <div className="OutstandingDoctor-customize">
                 <div className="bg-image" />
                 <div></div>
-                <h3>Bệnh viện sản nhi</h3>
+                <h4>Bệnh viện sản nhi</h4>
                 <p>Khoa mắt</p>
               </div>
             </Slider>
