@@ -92,7 +92,9 @@ class HomeHeader extends Component {
               <FormattedMessage id="banner.title1" />
             </div>
             <div className="title-2">
-              <FormattedMessage id="banner.title2" />
+              <b>
+                <FormattedMessage id="banner.title2" />
+              </b>
             </div>
             <div className="search">
               <i className="fas fa-search"></i>

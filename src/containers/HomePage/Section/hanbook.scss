@@ -1,0 +1,59 @@
+.section-Hanbook {
+    background: #fff;
+
+    .Hanbook-container {
+        margin        : 0 100px;
+        display       : flex;
+        flex-direction: column;
+
+        .Hanbook-header {
+            height       : 60px;
+            margin-bottom: 30px;
+            padding-top  : 30px;
+
+            .title-section {
+                font-size  : 22px;
+                font-weight: 600;
+            }
+
+            .btn-section {
+                margin-right  : 20px;
+                float         : right;
+                padding       : 10px 30px;
+                border        : none;
+                outline       : none;
+                display       : block;
+                background    : #dbd4d4;
+                color         : black;
+                cursor        : pointer;
+                text-transform: uppercase;
+
+
+                &:hover {
+                    color           : #fff;
+                    background-color: #f7d800;
+                }
+            }
+        }
+
+        .Hanbook-body {
+
+            .Hanbook-customize {
+                .bg-image {
+                    width              : 95%;
+                    height             : 200px;
+                    background         : url('../../../assets/Hanbook/kham-co-xuong-khop.jpg');
+                    background-position: center center;
+                    background-repeat  : no-repeat;
+                    background-size    : cover;
+                    background-color   : #eee;
+                    margin-bottom: 10px;
+                }
+            }
+
+
+           
+        }
+    }
+
+}
