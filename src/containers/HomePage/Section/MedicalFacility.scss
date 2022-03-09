@@ -1,13 +1,12 @@
-.section-specialty {
-    height: 330px;
-    background: #f5f5f5;
+.section-MedicalFacility {
+    background: #fff;
 
-    .specialty-container {
+    .MedicalFacility-container {
         margin        : 0 100px;
         display       : flex;
         flex-direction: column;
 
-        .specialty-header {
+        .MedicalFacility-header {
             height       : 60px;
             margin-bottom: 30px;
             padding-top  : 30px;
@@ -37,9 +36,9 @@
             }
         }
 
-        .specialty-body {
+        .MedicalFacility-body {
 
-            .specialty-customize {
+            .MedicalFacility-customize {
                 .bg-image {
                     width              : 95%;
                     height             : 200px;
@@ -51,6 +50,10 @@
                     margin-bottom: 10px;
                 }
             }
+
+
+           
         }
     }
+
 }
