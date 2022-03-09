@@ -1,12 +1,12 @@
-.section-MedicalFacility {
-    background: #fff;
+.section-OutstandingDoctor {
+    background: #f5f5f5;
 
-    .MedicalFacility-container {
+    .OutstandingDoctor-container {
         margin        : 0 100px;
         display       : flex;
         flex-direction: column;
 
-        .MedicalFacility-header {
+        .OutstandingDoctor-header {
             height       : 60px;
             margin-bottom: 30px;
             padding-top  : 30px;
@@ -36,13 +36,13 @@
             }
         }
 
-        .MedicalFacility-body {
+        .OutstandingDoctor-body {
 
-            .MedicalFacility-customize {
+            .OutstandingDoctor-customize {
                 .bg-image {
                     width              : 95%;
                     height             : 200px;
-                    background         : url('../../../assets/MedicalFacility/benh-vien-ha-noi.jpg');
+                    background         : url('../../../assets/OutstandingDoctor/bs-hoai-huong.jpg');
                     background-position: center center;
                     background-repeat  : no-repeat;
                     background-size    : cover;
