@@ -6,6 +6,8 @@ import "./HomePage.scss";
 import MedicalFacility from "./Section/MedicalFacility";
 import OutstandingDoctor from "./Section/OutstandingDoctor";
 import Hanbook from "./Section/hanbook";
+import About from "./Section/about";
+import HomeFooter from "./HomeFooter";
 class HomePage extends Component {
   render() {
     return (
@@ -15,6 +17,8 @@ class HomePage extends Component {
         <MedicalFacility />
         <OutstandingDoctor />
         <Hanbook />
+        <About />
+        <HomeFooter />
       </div>
     );
   }

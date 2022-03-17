@@ -164,7 +164,7 @@ class HomeHeader extends Component {
                   <i className="fas fa-briefcase-medical"></i>
                 </div>
                 <div className="text-child">
-                  <FormattedMessage id="banner.title1" />
+                  <FormattedMessage id="banner.title2" />
                 </div>
               </div>
             </div>

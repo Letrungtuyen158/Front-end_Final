@@ -143,7 +143,7 @@
       justify-content: center;
 
       .options-child {
-        width      : 100px;
+        width      : 150px;
         font-size  : 17px;
         font-weight: 500px;
         cursor     : pointer;
@@ -168,10 +168,10 @@
           font-weight: 700px;
           text-shadow: 1px 1px 1px #333;
 
-          color: #fff;
+          color: #45c3d2;
 
           &:hover {
-            color: #45c3d2;
+            color: #107f8b;
           }
         }
       }
