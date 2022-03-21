@@ -3,6 +3,7 @@ import { connect } from "react-redux";
 import { FormattedMessage } from "react-intl";
 import { getAllCodeService } from "../../../services/userService";
 import { LANGUAGES } from "../../../utils";
+import * as actions from "../../../store/actions";
 class ProductManage extends Component {
   constructor(props) {
     super(props);
@@ -12,15 +13,13 @@ class ProductManage extends Component {
   }
 
   async componentDidMount() {
-    try {
-      let res = await getAllCodeService("gender");
-      if (res && res.errCode === 0) {
-        this.setState({
-          genderArr: res.data,
-        });
-      }
-    } catch (e) {
-      console.log(e);
+    this.props.getGenderStart();
+  }
+  componentDidUpdate(prevProps, prevState, snapsbot) {
+    if (prevProps.genderRedux !== this.props.genderRedux) {
+      this.setState({
+        genderArr: this.props.genderRedux,
+      });
     }
   }
 
@@ -130,11 +129,14 @@ class ProductManage extends Component {
 const mapStateToProps = (state) => {
   return {
     language: state.app.language,
+    genderRedux: state.admin.genders,
   };
 };
 
 const mapDispatchToProps = (dispatch) => {
-  return {};
+  return {
+    getGenderStart: () => dispatch(actions.fetchGenderStart()),
+  };
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(ProductManage);
