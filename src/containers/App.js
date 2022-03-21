@@ -10,10 +10,8 @@ import {
 } from "../hoc/authentication";
 import { path } from "../utils";
 import Home from "../routes/Home";
-// import Login from '../routes/Login';
 import Login from "./Auth/Login";
 import HomePage from "./HomePage/HomePage";
-import Header from "./Header/Header";
 import System from "../routes/System";
 import { CustomToastCloseButton } from "../components/CustomToast";
 import CustomScrollbars from "../components/CustomScrollbars";
@@ -42,7 +40,6 @@ class App extends Component {
       <Fragment>
         <Router history={history}>
           <div className="main-container">
-            {this.props.isLoggedIn && <Header />}
             <div className="content-container">
               <CustomScrollbars style={{ height: "100vh", width: "100%" }}>
                 <Switch>

@@ -20,6 +20,20 @@
         "child4":"Medical test",
         "child5":"Mental health",
         "child6":"Dental examination"
+    },
+    "menu": {
+        "system": {
+            "header": "System",
+            "system-administrator": {
+                "header": "System Administrator",
+                "user-redux": "Manage user using redux",
+                "product-manage": "Package manage",
+                "register-package-group-or-account": "Register service package for group/account"
+            },
+            "system-parameter": {
+                "header": "System-parameter"
+            }
+        }
     }
  
 }

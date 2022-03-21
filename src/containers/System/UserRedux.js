@@ -1,12 +1,20 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 class ProductManage extends Component {
-  state = {};
+  constructor(props) {
+    super(props);
+    this.state = {};
+  }
 
   componentDidMount() {}
 
   render() {
-    return <div className="text-center">Manage products</div>;
+    return (
+      <div className="container">
+        <div className="title"> Manage info User Redux</div>;
+        <div className="user-redux"></div>
+      </div>
+    );
   }
 }
 

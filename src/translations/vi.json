@@ -20,7 +20,20 @@
         "child4":"Xét nghiệm y học",
         "child5":"Sức khỏe tinh thần",
         "child6":"Khám nha khoa"
+    },
+    "menu": {
+        "system": {
+            "header": "Hệ thống",
+            "system-administrator": {
+                "header": "Quản trị hệ thống",
+                "user-redux": "Quản lý user Redux",
+                "product-manage": "Quản lý gói",
+                "register-package-group-or-account": "Đăng ký gói dịch vụ cho nhóm/tài khoản"
+            },
+            "system-parameter": {
+                "header": "Tham số hệ thống"
+            }
+        }
     }
-
    
 }
