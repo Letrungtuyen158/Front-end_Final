@@ -16,6 +16,9 @@ const deleteUserService = (userId) => {
 const editUserService = (imputData) => {
   return axios.put("/api/edit-users", imputData);
 };
+const getAllCodeService = (inputType) => {
+  return axios.get(`/api/allcode?type=${inputType}`);
+};
 
 export {
   handleLoginApi,
@@ -23,4 +26,5 @@ export {
   createNewUserService,
   deleteUserService,
   editUserService,
+  getAllCodeService,
 };

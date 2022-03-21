@@ -37,6 +37,20 @@
             "handbook":"Cẩm nan",
             "manage-handbook":"Quản lí cẩm nan"
         }
+    },
+    "manege-user":{
+        "add": "Thêm mới người dùng ",
+        "email":"email",
+        "password":"Mật khẩu",
+        "first-name":"Tên",
+        "last-name":"Họ",
+        "phone-number":"Số điện thoại",
+        "address":"Địa chỉ",
+        "gender":"Gới tính",
+        "position":"Chức danh",
+        "role":"vai trò",
+        "save": "lưu user",
+        "image":"ảnh đại diện"
     }
    
 }
