@@ -21,6 +21,7 @@
         }
     }
     .languages{
+        
         .language-en{
             margin-left: 10px;
             margin-right: 15px;
@@ -32,6 +33,7 @@
         }
         .language-vi{
             cursor: pointer;
+            margin-left: 10px;
             &.active{
                 opacity:1;
                 color: orange;

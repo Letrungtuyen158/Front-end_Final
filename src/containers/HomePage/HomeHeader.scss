@@ -55,23 +55,24 @@
         align-items  : center;
       }
 
-      .langguage-vi {
+      .language-vi{
         cursor: pointer;
-
-        &.active {
-          color: #f7d800;
+        margin-left: 10px;
+        &.active{
+            opacity:1;
+            color: orange;
         }
+    }
+
+    .language-en{
+      margin-left: 10px;
+      margin-right: 15px;
+      cursor: pointer;
+      &.active{
+          opacity: 1;
+          color: #30d663;
       }
-
-      .langguage-en {
-        margin: 0 10px;
-        cursor: pointer;
-
-        &.active {
-          color: blue;
-        }
-
-      }
+  }
     }
   }
 }

@@ -9,7 +9,8 @@ class HomeHeader extends Component {
     this.props.changeLangugeAppRedux(language);
   };
   render() {
-    const langguage = this.props.langguage;
+    const { language, userInfo } = this.props;
+    console.log(userInfo);
     return (
       <>
         <div className="home-header-container">
@@ -64,23 +65,26 @@ class HomeHeader extends Component {
               <div className="support">
                 <i className="fas fa-question-circle">Hỗ trợ</i>
               </div>
-              <div className="langguage-vi active">
-                <span
-                  onClick={() => {
-                    this.changeLanguge(LANGUAGES.VI);
-                  }}
-                >
-                  VN
-                </span>
+
+              <div
+                className={
+                  language === LANGUAGES.VI
+                    ? "language-vi active"
+                    : "language-vi"
+                }
+                onClick={() => this.changeLanguge(LANGUAGES.VI)}
+              >
+                <span>VN</span>
               </div>
-              <div className="langguage-en active">
-                <span
-                  onClick={() => {
-                    this.changeLanguge(LANGUAGES.EN);
-                  }}
-                >
-                  EN
-                </span>
+              <div
+                className={
+                  language === LANGUAGES.EN
+                    ? "language-en active"
+                    : "language-en"
+                }
+                onClick={() => this.changeLanguge(LANGUAGES.EN)}
+              >
+                <span>EN</span>
               </div>
             </div>
           </div>
@@ -178,6 +182,7 @@ class HomeHeader extends Component {
 const mapStateToProps = (state) => {
   return {
     isLoggedIn: state.user.isLoggedIn,
+    userInfo: state.user.userInfo,
     language: state.app.language,
   };
 };
