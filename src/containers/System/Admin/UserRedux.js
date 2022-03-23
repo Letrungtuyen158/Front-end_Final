@@ -1,19 +1,24 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { FormattedMessage } from "react-intl";
-import { getAllCodeService } from "../../../services/userService";
 import { LANGUAGES } from "../../../utils";
 import * as actions from "../../../store/actions";
+import "./UserRedux.scss";
 class ProductManage extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      previewImage: "",
       genderArr: [],
+      positionArr: [],
+      roleArr: [],
     };
   }
 
   async componentDidMount() {
     this.props.getGenderStart();
+    this.props.getPositionStart();
+    this.props.getRoleStart();
   }
   componentDidUpdate(prevProps, prevState, snapsbot) {
     if (prevProps.genderRedux !== this.props.genderRedux) {
@@ -21,11 +26,35 @@ class ProductManage extends Component {
         genderArr: this.props.genderRedux,
       });
     }
+    if (prevProps.roleRedux !== this.props.roleRedux) {
+      this.setState({
+        roleArr: this.props.genderRedux,
+      });
+    }
+    if (prevProps.positionRedux !== this.props.positionRedux) {
+      this.setState({
+        positionArr: this.props.positionRedux,
+      });
+    }
   }
+  handleOnChangeImage = (event) => {
+    let data = event.target.files[0];
+    if (data) {
+      let objectURL = URL.createObjectURL(data);
+      this.setState({
+        previewImage: objectURL,
+      });
+    }
+  };
 
   render() {
     let genders = this.state.genderArr;
+    let position = this.state.positionArr;
+    let roles = this.state.roleArr;
     let language = this.props.language;
+    let isLoadingGender = this.props.isLoadingGender;
+
+    console.log(this.state, "ss");
     return (
       <div className="container">
         <div className="title"> Manage info User Redux</div>;
@@ -34,6 +63,9 @@ class ProductManage extends Component {
             <div className="row">
               <div className="col-12 my-3">
                 <FormattedMessage id="manege-user.add" />
+              </div>
+              <div className="col-12 ">
+                {isLoadingGender === true ? "...loading" : ""}
               </div>
               <div className="col-3 ">
                 <label>
@@ -59,19 +91,19 @@ class ProductManage extends Component {
                 </label>
                 <input className="form-control" type="text" />
               </div>
-              <div className="col-3">
+              <div className="col-3 mt-5">
                 <label>
                   <FormattedMessage id="manege-user.phone-number" />
                 </label>
                 <input className="form-control" type="text" />
               </div>
-              <div className="col-9">
+              <div className="col-9 mt-5">
                 <label>
                   <FormattedMessage id="manege-user.address" />
                 </label>
                 <input className="form-control" type="text" />
               </div>
-              <div className="col-3">
+              <div className="col-3 mt-5">
                 <label>
                   <FormattedMessage id="manege-user.gender" />
                 </label>
@@ -89,31 +121,65 @@ class ProductManage extends Component {
                     })}
                 </select>
               </div>
-              <div className="col-3 mt-3">
+              <div className="col-3 mt-5 ">
                 <label>
                   <FormattedMessage id="manege-user.position" />
                 </label>
                 <select class="form-control">
-                  <option selected>Choose...</option>
-                  <option>...</option>
+                  {position &&
+                    position.length > 0 &&
+                    position.map((items, index) => {
+                      return (
+                        <option key={index}>
+                          {language === LANGUAGES.VI
+                            ? items.valueVi
+                            : items.valueEn}
+                        </option>
+                      );
+                    })}
                 </select>
               </div>
-              <div className="col-3">
+              <div className="col-3 mt-5">
                 <label>
                   <FormattedMessage id="manege-user.role" />
                 </label>
                 <select class="form-control">
-                  <option selected>Choose...</option>
-                  <option>...</option>
+                  {roles &&
+                    roles.length > 0 &&
+                    roles.map((items, index) => {
+                      return (
+                        <option key={index}>
+                          {language === LANGUAGES.VI
+                            ? items.valueVi
+                            : items.valueEn}
+                        </option>
+                      );
+                    })}
                 </select>
               </div>
-              <div className="col-3">
+              <div className="col-3 mt-5">
                 <label>
                   <FormattedMessage id="manege-user.image" />
                 </label>
-                <input className="form-control" type="text" />
+                <div className="preview-img-container">
+                  <input
+                    id="previewImg"
+                    type="file"
+                    hidden
+                    onChange={(event) => this.handleOnChangeImage(event)}
+                  />
+                  <label className="lable-update" htmlFor="previewImg">
+                    Tải ảnh<i className="fas fa-upload"></i>
+                  </label>
+                  <div
+                    className="preview-image"
+                    style={{
+                      backgroundImage: `url(${this.state.previewImage})`,
+                    }}
+                  ></div>
+                </div>
               </div>
-              <div className="col-12">
+              <div className="col-12 mt-5">
                 <button className="btn btn-primary">
                   <FormattedMessage id="manege-user.save" />
                 </button>
@@ -130,12 +196,17 @@ const mapStateToProps = (state) => {
   return {
     language: state.app.language,
     genderRedux: state.admin.genders,
+    isLoadingGender: state.admin.isLoadingGender,
+    positionRedux: state.admin.position,
+    roleRedux: state.admin.roles,
   };
 };
 
 const mapDispatchToProps = (dispatch) => {
   return {
     getGenderStart: () => dispatch(actions.fetchGenderStart()),
+    getPositionStart: () => dispatch(actions.fetchPositionStart()),
+    getRoleStart: () => dispatch(actions.fetchRoleStart()),
   };
 };
 
