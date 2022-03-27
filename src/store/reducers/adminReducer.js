@@ -20,7 +20,7 @@ const adminReducer = (state = initialState, action) => {
       return {
         ...state,
       };
-    case actionTypes.FETCH_GENDER_FAILED:
+    case actionTypes.FETCH_GENDER_FAILDED:
       state.isLoadingGender = false;
       state.genders = [];
       return {
@@ -32,17 +32,18 @@ const adminReducer = (state = initialState, action) => {
       return {
         ...state,
       };
-    case actionTypes.FETCH_POSITION_FAILED:
+    case actionTypes.FETCH_POSITION_FAILDED:
       state.position = [];
       return {
         ...state,
       };
     case actionTypes.FETCH_ROLE_SUCSSES:
       state.roles = action.data;
+      console.log(state.roles, "ssssss");
       return {
         ...state,
       };
-    case actionTypes.FETCH_ROLE_FAILED:
+    case actionTypes.FETCH_ROLE_FAILDED:
       state.roles = [];
       return {
         ...state,
