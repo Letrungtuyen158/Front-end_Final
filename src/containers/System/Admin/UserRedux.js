@@ -1,18 +1,22 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { FormattedMessage } from "react-intl";
-import { LANGUAGES } from "../../../utils";
+import { LANGUAGES, CommonUtils, CRUD_ACTION } from "../../../utils";
 import * as actions from "../../../store/actions";
+import TableManageUser from "./TableManageUser";
 import "./UserRedux.scss";
+import Lightbox from "react-image-lightbox";
+import "react-image-lightbox/style.css";
 class ProductManage extends Component {
   constructor(props) {
     super(props);
     this.state = {
       previewImage: "",
+      isOpen: false,
       genderArr: [],
       positionArr: [],
       roleArr: [],
-
+      userEditId: "",
       email: "",
       password: "",
       firstName: "",
@@ -23,6 +27,8 @@ class ProductManage extends Component {
       position: "",
       role: "",
       avatar: "",
+
+      action: "",
     };
   }
 
@@ -34,6 +40,7 @@ class ProductManage extends Component {
   componentDidUpdate(prevProps, prevState, snapsbot) {
     if (prevProps.genderRedux !== this.props.genderRedux) {
       let arrGenders = this.props.genderRedux;
+
       this.setState({
         genderArr: arrGenders,
         gender: arrGenders && arrGenders.length > 0 ? arrGenders[0].key : "",
@@ -54,38 +61,84 @@ class ProductManage extends Component {
           arrPositions && arrPositions.length > 0 ? arrPositions[0].key : "",
       });
     }
+    if (prevProps.listUsers !== this.props.listUsers) {
+      let arrGenders = this.props.genderRedux;
+      let arrRoles = this.props.roleRedux;
+      let arrPositions = this.props.positionRedux;
+      this.setState({
+        email: "",
+        password: "",
+        firstName: "",
+        lastName: "",
+        phoneNumber: "",
+        address: "",
+        gender: arrGenders && arrGenders.length > 0 ? arrGenders[0].key : "",
+        position:
+          arrPositions && arrPositions.length > 0 ? arrPositions[0].key : "",
+        role: arrRoles && arrRoles.length > 0 ? arrRoles[0].key : "",
+
+        avatar: "",
+        action: CRUD_ACTION.CREATE,
+      });
+    }
   }
-  handleOnChangeImage = (event) => {
+  handleOnChangeImage = async (event) => {
     let data = event.target.files[0];
     if (data) {
+      let base64 = await CommonUtils.getBase64(data);
+      console.log(base64);
       let objectURL = URL.createObjectURL(data);
       this.setState({
         previewImage: objectURL,
-        avatar: data,
+        avatar: base64,
       });
     }
   };
   handleSaveUser = () => {
-    console.log(this.state, "check state");
     let isValid = this.checkValidateInput();
     if (isValid === false) return;
-    //fire redux action
-    this.props.createNewUser({
-      email: this.state.email,
-      password: this.state.password,
-      firstName: this.state.firstName,
-      lastName: this.state.lastName,
-      address: this.state.address,
-      phonenumber: this.state.phoneNumber,
-      gender: this.state.gender,
-      roleId: this.state.role,
-      positionId: this.state.position,
-    });
+
+    let { action } = this.state;
+    if (action === CRUD_ACTION.CREATE) {
+      //fire redux action
+      this.props.createNewUser({
+        email: this.state.email,
+        password: this.state.password,
+        firstName: this.state.firstName,
+        lastName: this.state.lastName,
+        address: this.state.address,
+        phonenumber: this.state.phoneNumber,
+        gender: this.state.gender,
+        roleId: this.state.role,
+        positionId: this.state.position,
+        avatar: this.state.avatar,
+      });
+    }
+    if (action === CRUD_ACTION.EDIT) {
+      //fire redux edit user
+      this.props.EditAUserRedux({
+        email: this.state.email,
+        password: this.state.password,
+        firstName: this.state.firstName,
+        lastName: this.state.lastName,
+        address: this.state.address,
+        phonenumber: this.state.phoneNumber,
+        gender: this.state.gender,
+        roleId: this.state.role,
+        positionId: this.state.position,
+        avatar: this.state.avatar,
+        id: this.state.userEditId,
+      });
+    }
+
+    setTimeout(() => {
+      this.props.fetchUserRedux();
+    }, 1000);
   };
   checkValidateInput = () => {
     let isValid = true;
     let arrCheck = [
-      "email",
+      " ",
       "password",
       "firstName",
       "lastName",
@@ -108,13 +161,34 @@ class ProductManage extends Component {
       ...copyState,
     });
   };
+  handleEditUserFromParent = (user) => {
+    console.log("checkhandleUSer", user);
+    this.setState({
+      email: user.email ?? "",
+      password: "HARDCODE",
+      firstName: user.firstName ?? "",
+      lastName: user.lastName ?? "",
+      phoneNumber: user.phonenumber ?? "",
+      address: user.address ?? "",
+      gender: user.gender ?? "",
+      position: user.positionId ?? "",
+      role: user.roleId ?? "",
+      avatar: "",
+      action: CRUD_ACTION.EDIT,
+      userEditId: user.id,
+    });
+  };
+
+  openPreviewImage = () => {
+    if (!this.state.previewImage) return;
+    this.setState({ isOpen: true });
+  };
   render() {
     let genders = this.state.genderArr;
     let positions = this.state.positionArr;
     let roles = this.state.roleArr;
     let language = this.props.language;
     let isLoadingGender = this.props.isLoadingGender;
-    console.log(roles);
     let {
       email,
       password,
@@ -128,7 +202,6 @@ class ProductManage extends Component {
       avatar,
     } = this.state;
 
-    console.log(this.state, "ss");
     return (
       <div className="container">
         <div className="title"> Manage info User Redux</div>;
@@ -152,6 +225,9 @@ class ProductManage extends Component {
                   onChange={(event) => {
                     this.onChangeInput(event, "email");
                   }}
+                  disabled={
+                    this.state.action === CRUD_ACTION.EDIT ? true : false
+                  }
                 />
               </div>
               <div className="col-3">
@@ -165,6 +241,9 @@ class ProductManage extends Component {
                   onChange={(event) => {
                     this.onChangeInput(event, "password");
                   }}
+                  disabled={
+                    this.state.action === CRUD_ACTION.EDIT ? true : false
+                  }
                 />
               </div>
               <div className="col-3">
@@ -228,6 +307,7 @@ class ProductManage extends Component {
                   onChange={(event) => {
                     this.onChangeInput(event, "gender");
                   }}
+                  value={gender}
                 >
                   {genders &&
                     genders.length > 0 &&
@@ -251,6 +331,7 @@ class ProductManage extends Component {
                   onChange={(event) => {
                     this.onChangeInput(event, "position");
                   }}
+                  value={position}
                 >
                   {positions &&
                     positions.length > 0 &&
@@ -274,6 +355,7 @@ class ProductManage extends Component {
                   onChange={(event) => {
                     this.onChangeInput(event, "role");
                   }}
+                  value={role}
                 >
                   {roles &&
                     roles.length > 0 &&
@@ -307,20 +389,41 @@ class ProductManage extends Component {
                     style={{
                       backgroundImage: `url(${this.state.previewImage})`,
                     }}
+                    onClick={() => this.openPreviewImage()}
                   ></div>
                 </div>
               </div>
-              <div className="col-12  ">
+              <div className="col-12 my-3  ">
                 <button
-                  className="btn btn-primary"
+                  className={
+                    this.state.action === CRUD_ACTION.EDIT
+                      ? "btn btn-warning"
+                      : "btn btn-primary"
+                  }
                   onClick={() => this.handleSaveUser()}
                 >
-                  <FormattedMessage id="manege-user.save" />
+                  {this.state.action === CRUD_ACTION.EDIT ? (
+                    <FormattedMessage id="manege-user.edit" />
+                  ) : (
+                    <FormattedMessage id="manege-user.save" />
+                  )}
                 </button>
+              </div>
+              <div className="col-12">
+                <TableManageUser
+                  handleEditUserFromParentKey={this.handleEditUserFromParent}
+                  action={this.state.action}
+                />
               </div>
             </div>
           </div>
         </div>
+        {this.state.isOpen === true && (
+          <Lightbox
+            mainSrc={this.state.previewImage}
+            onCloseRequest={() => this.setState({ isOpen: false })}
+          />
+        )}
       </div>
     );
   }
@@ -333,6 +436,7 @@ const mapStateToProps = (state) => {
     isLoadingGender: state.admin.isLoadingGender,
     positionRedux: state.admin.position,
     roleRedux: state.admin.roles,
+    listUsers: state.admin.user,
   };
 };
 
@@ -342,6 +446,8 @@ const mapDispatchToProps = (dispatch) => {
     getPositionStart: () => dispatch(actions.fetchPositionStart()),
     getRoleStart: () => dispatch(actions.fetchRoleStart()),
     createNewUser: (data) => dispatch(actions.createNewUser(data)),
+    fetchUserRedux: () => dispatch(actions.fetchAllUserStart()),
+    EditAUserRedux: (data) => dispatch(actions.EditAUser(data)),
   };
 };
 

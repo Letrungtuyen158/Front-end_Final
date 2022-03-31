@@ -5,6 +5,8 @@ const initialState = {
   genders: [],
   roles: [],
   position: [],
+  user: [],
+  topDoctors: [],
 };
 
 const adminReducer = (state = initialState, action) => {
@@ -39,7 +41,6 @@ const adminReducer = (state = initialState, action) => {
       };
     case actionTypes.FETCH_ROLE_SUCSSES:
       state.roles = action.data;
-      console.log(state.roles, "ssssss");
       return {
         ...state,
       };
@@ -48,7 +49,30 @@ const adminReducer = (state = initialState, action) => {
       return {
         ...state,
       };
+    case actionTypes.FETCH_ALL_USERS_SUCSSES:
+      state.user = action.users;
+      console.log(state.user, "user sucess");
 
+      return {
+        ...state,
+      };
+    case actionTypes.FETCH_ALL_USERS_FAILDED:
+      state.user = [];
+      return {
+        ...state,
+      };
+    case actionTypes.FETCH_TOP_DOCTORS_SUCSSES:
+      state.topDoctors = action.dataDoctors;
+      console.log(state.topDoctors, "check sucsses");
+      return {
+        ...state,
+      };
+    case actionTypes.FETCH_TOP_DOCTORS_FAILDED:
+      state.topDoctors = [];
+      console.log(state.topDoctors, "check failded");
+      return {
+        ...state,
+      };
     default:
       return state;
   }

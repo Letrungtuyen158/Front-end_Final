@@ -5,8 +5,12 @@ import { FormattedMessage } from "react-intl";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
+import * as actions from "../../../store/actions";
 
 class OutstandingDoctor extends Component {
+  componentDidMount() {
+    this.props.loadTopDoctors();
+  }
   render() {
     let settings = {
       dots: false,
@@ -15,6 +19,8 @@ class OutstandingDoctor extends Component {
       slidesToShow: 4,
       slidesToScroll: 2,
     };
+
+    console.log("tuyenle check", this.props.topDoctorRedux);
     return (
       <div className="section-OutstandingDoctor">
         <div className="OutstandingDoctor-container">
@@ -69,11 +75,14 @@ const mapStateToProps = (state) => {
   return {
     isLoggedIn: state.user.isLoggedIn,
     language: state.app.language,
+    topDoctorRedux: state.admin.topDoctors,
   };
 };
 
 const mapDispatchToProps = (dispatch) => {
-  return {};
+  return {
+    loadTopDoctors: () => dispatch(actions.fectchTopDoctor()),
+  };
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(OutstandingDoctor);
