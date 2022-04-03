@@ -6,21 +6,38 @@ import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import * as actions from "../../../store/actions";
+import { LANGUAGES } from "../../../utils";
 
 class OutstandingDoctor extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      arrDoctors: [],
+    };
+  }
+  componentDidUpdate(prevProps, prevState, snapshot) {
+    if (prevProps.topDoctorRedux !== this.props.topDoctorRedux) {
+      this.setState({
+        arrDoctors: this.props.topDoctorRedux,
+      });
+    }
+  }
   componentDidMount() {
     this.props.loadTopDoctors();
   }
   render() {
     let settings = {
       dots: false,
-      Infinity: true,
+      Infinity: false,
       speed: 500,
       slidesToShow: 4,
       slidesToScroll: 2,
     };
 
-    console.log("tuyenle check", this.props.topDoctorRedux);
+    let allDoctor = this.state.arrDoctors;
+    let allDoctors = allDoctor.concat(allDoctor);
+    let { language } = this.props;
+
     return (
       <div className="section-OutstandingDoctor">
         <div className="OutstandingDoctor-container">
@@ -30,39 +47,33 @@ class OutstandingDoctor extends Component {
           </div>
           <div className="OutstandingDoctor-body">
             <Slider {...settings}>
-              <div className="OutstandingDoctor-customize">
-                <div className="bg-image" />
-                <div className="">
-                  <h4>Bệnh viện đà nẵng</h4>
-                  <p>Cơ xương khớp</p>
-                </div>
-              </div>
-              <div className="OutstandingDoctor-customize">
-                <div className="bg-image" />
-                <h4>Bệnh viên hữu nghị việt đức</h4>
-                <p>Da liễu</p>
-              </div>
-              <div className="OutstandingDoctor-customize">
-                <div className="bg-image" />
-                <h4>Bệnh viện FPT</h4>
-                <p>Sức khỏe tâm thần</p>
-              </div>
-              <div className="OutstandingDoctor-customize">
-                <div className="bg-image" />
-                <h4>Bệnh viện y học dược1</h4>
-                <p>Thần kinh</p>
-              </div>
-              <div className="OutstandingDoctor-customize">
-                <div className="bg-image" />
-                <h4>Bệnh viện U bướu</h4>
-                <p>Khoa sản phụ</p>
-              </div>
-              <div className="OutstandingDoctor-customize">
-                <div className="bg-image" />
-                <div></div>
-                <h4>Bệnh viện sản nhi</h4>
-                <p>Khoa mắt</p>
-              </div>
+              {allDoctors &&
+                allDoctors.length > 0 &&
+                allDoctors.map((item, index) => {
+                  let imageBase64 = "";
+                  if (item.image) {
+                    imageBase64 = new Buffer(item.image, "base64").toString(
+                      "binary"
+                    );
+                  }
+                  let nameVi = `${item.positionData.valueVi}: ${item.firstName} ${item.lastName}`;
+                  let nameEn = `${item.positionData.valueEn}: ${item.firstName} ${item.lastName}`;
+
+                  return (
+                    <div className="OutstandingDoctor-customize" key={index}>
+                      <div
+                        className="bg-image"
+                        style={{
+                          backgroundImage: `url(${imageBase64})`,
+                        }}
+                      />
+                      <div className="">
+                        <h4>{language === LANGUAGES.VI ? nameVi : nameEn}</h4>
+                        <p>Cơ xương khớp</p>
+                      </div>
+                    </div>
+                  );
+                })}
             </Slider>
           </div>
         </div>

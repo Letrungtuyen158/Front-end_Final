@@ -51,8 +51,6 @@ const adminReducer = (state = initialState, action) => {
       };
     case actionTypes.FETCH_ALL_USERS_SUCSSES:
       state.user = action.users;
-      console.log(state.user, "user sucess");
-
       return {
         ...state,
       };
@@ -69,7 +67,6 @@ const adminReducer = (state = initialState, action) => {
       };
     case actionTypes.FETCH_TOP_DOCTORS_FAILDED:
       state.topDoctors = [];
-      console.log(state.topDoctors, "check failded");
       return {
         ...state,
       };

@@ -43,28 +43,29 @@ class ProductManage extends Component {
 
       this.setState({
         genderArr: arrGenders,
-        gender: arrGenders && arrGenders.length > 0 ? arrGenders[0].key : "",
+        gender: arrGenders && arrGenders.length > 0 ? arrGenders[0].keyMap : "",
       });
     }
     if (prevProps.roleRedux !== this.props.roleRedux) {
       let arrRoles = this.props.roleRedux;
       this.setState({
         roleArr: arrRoles,
-        role: arrRoles && arrRoles.length > 0 ? arrRoles[0].key : "",
+        role: arrRoles && arrRoles.length > 0 ? arrRoles[0].keyMap : "",
       });
     }
     if (prevProps.positionRedux !== this.props.positionRedux) {
       let arrPositions = this.props.positionRedux;
       this.setState({
         positionArr: this.props.positionRedux,
-        positions:
-          arrPositions && arrPositions.length > 0 ? arrPositions[0].key : "",
+        position:
+          arrPositions && arrPositions.length > 0 ? arrPositions[0].keyMap : "",
       });
     }
     if (prevProps.listUsers !== this.props.listUsers) {
       let arrGenders = this.props.genderRedux;
       let arrRoles = this.props.roleRedux;
       let arrPositions = this.props.positionRedux;
+      console.log(arrRoles, "role ");
       this.setState({
         email: "",
         password: "",
@@ -72,11 +73,10 @@ class ProductManage extends Component {
         lastName: "",
         phoneNumber: "",
         address: "",
-        gender: arrGenders && arrGenders.length > 0 ? arrGenders[0].key : "",
+        gender: arrGenders && arrGenders.length > 0 ? arrGenders[0].keyMap : "",
         position:
-          arrPositions && arrPositions.length > 0 ? arrPositions[0].key : "",
-        role: arrRoles && arrRoles.length > 0 ? arrRoles[0].key : "",
-
+          arrPositions && arrPositions.length > 0 ? arrPositions[0].keyMap : "",
+        role: arrRoles && arrRoles.length > 0 ? arrRoles[0].keyMap : "",
         avatar: "",
         action: CRUD_ACTION.CREATE,
       });
@@ -138,7 +138,6 @@ class ProductManage extends Component {
   checkValidateInput = () => {
     let isValid = true;
     let arrCheck = [
-      " ",
       "password",
       "firstName",
       "lastName",
@@ -162,7 +161,10 @@ class ProductManage extends Component {
     });
   };
   handleEditUserFromParent = (user) => {
-    console.log("checkhandleUSer", user);
+    let imageBase64 = "";
+    if (user.image) {
+      imageBase64 = new Buffer(user.image, "base64").toString("binary");
+    }
     this.setState({
       email: user.email ?? "",
       password: "HARDCODE",
@@ -174,6 +176,7 @@ class ProductManage extends Component {
       position: user.positionId ?? "",
       role: user.roleId ?? "",
       avatar: "",
+      previewImage: imageBase64,
       action: CRUD_ACTION.EDIT,
       userEditId: user.id,
     });
@@ -313,7 +316,7 @@ class ProductManage extends Component {
                     genders.length > 0 &&
                     genders.map((items, index) => {
                       return (
-                        <option key={index} value={items.key}>
+                        <option key={index} value={items.keyMap}>
                           {language === LANGUAGES.VI
                             ? items.valueVi
                             : items.valueEn}
@@ -337,7 +340,7 @@ class ProductManage extends Component {
                     positions.length > 0 &&
                     positions.map((items, index) => {
                       return (
-                        <option key={index} value={items.key}>
+                        <option key={index} value={items.keyMap}>
                           {language === LANGUAGES.VI
                             ? items.valueVi
                             : items.valueEn}
@@ -361,7 +364,7 @@ class ProductManage extends Component {
                     roles.length > 0 &&
                     roles.map((items, index) => {
                       return (
-                        <option key={index} value={items.key}>
+                        <option key={index} value={items.keyMap}>
                           {language === LANGUAGES.VI
                             ? items.valueVi
                             : items.valueEn}

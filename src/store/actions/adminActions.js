@@ -133,8 +133,9 @@ export const fetchAllUsersFailed = () => ({
 export const fectchTopDoctor = () => {
   return async (dispatch, getState) => {
     try {
-      let res = await getTopDoctorHomeService(3);
-      if (res && !res.errCode) {
+      let res = await getTopDoctorHomeService("");
+      console.log(res, "check res");
+      if (res && res.errorCode === 0) {
         dispatch({
           type: actionTypes.FETCH_TOP_DOCTORS_SUCSSES,
           dataDoctors: res.data,
