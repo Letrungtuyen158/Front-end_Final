@@ -1,12 +1,12 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import "./OutstandingDoctor.scss";
-import { FormattedMessage } from "react-intl";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import * as actions from "../../../store/actions";
 import { LANGUAGES } from "../../../utils";
+import { withRouter } from "react-router";
 
 class OutstandingDoctor extends Component {
   constructor(props) {
@@ -25,6 +25,10 @@ class OutstandingDoctor extends Component {
   componentDidMount() {
     this.props.loadTopDoctors();
   }
+  handlerViewDetailDoctor = (doctor) => {
+    console.log(doctor, "this is doctor");
+    this.props.history.push(`/detail-doctor/${doctor.id}`);
+  };
   render() {
     let settings = {
       dots: false,
@@ -60,7 +64,11 @@ class OutstandingDoctor extends Component {
                   let nameEn = `${item.positionData.valueEn}: ${item.firstName} ${item.lastName}`;
 
                   return (
-                    <div className="OutstandingDoctor-customize" key={index}>
+                    <div
+                      className="OutstandingDoctor-customize"
+                      key={index}
+                      onClick={() => this.handlerViewDetailDoctor(item)}
+                    >
                       <div
                         className="bg-image"
                         style={{
@@ -96,4 +104,6 @@ const mapDispatchToProps = (dispatch) => {
   };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(OutstandingDoctor);
+export default withRouter(
+  connect(mapStateToProps, mapDispatchToProps)(OutstandingDoctor)
+);
