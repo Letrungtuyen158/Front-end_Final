@@ -30,7 +30,7 @@ class Login extends Component {
 
     try {
       let data = await handleLoginApi(this.state.username, this.state.password);
-    
+
       if (data && data.errcode !== 0) {
         this.setState({ errMessage: data.message });
       }
@@ -48,6 +48,11 @@ class Login extends Component {
 
   HandlerShowHidepassword = () => {
     this.setState({ isShowPassword: !this.state.isShowPassword });
+  };
+  handleKeyDown = (event) => {
+    if (event.key === "Enter" || event.keyCode === 13) {
+      this.handleLogin();
+    }
   };
 
   render() {
@@ -79,6 +84,9 @@ class Login extends Component {
                   value={this.state.password}
                   onChange={(event) => {
                     this.handlerOnchagePassword(event);
+                  }}
+                  onKeyDown={(event) => {
+                    this.handleKeyDown(event);
                   }}
                 />
                 <span

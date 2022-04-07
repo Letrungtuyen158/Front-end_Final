@@ -38,6 +38,9 @@
             "manage-handbook":"Quản lí cẩm nan"
         }
     },
+    "doctor":{
+        "manage-schedule":"Quản lý kế hoạch khám bệnh"
+    },
     "manege-user":{
         "add": "Thêm mới người dùng ",
         "email":"email",
@@ -52,6 +55,16 @@
         "save": "Tạo mới người dùng",
         "image":"ảnh đại diện",
         "edit": "lưu thay đổi"
+    },
+    "homepage":{
+        "outstanding-doctor":"Bacs sĩ nổi bật tuần qua",
+        "more-infor":"xem thêm"
+    },
+    "manage-schedule":{
+        "title":"Quản lý kế hoạch khám bệnh của bác sĩ",
+        "choose-doctor":"chọn bác sĩ",
+        "choose-date":"chọn ngày",
+        "save":"lưu thông tin"
     }
    
 }

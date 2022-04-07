@@ -260,3 +260,26 @@ export const saveDetailDoctorAction = (data) => {
     }
   };
 };
+export const fetchAllScheduleTime = () => {
+  return async (dispatch, getState) => {
+    try {
+      let res = await getAllCodeService("TIME");
+      console.log(res, "ress");
+      if (res && res.errCode === 0) {
+        dispatch({
+          type: actionTypes.FETCH_ALLCODE_SCHEDULE_TIME_SUCSSES,
+          dataTime: res.data,
+        });
+      } else {
+        dispatch({
+          type: actionTypes.FETCH_ALLCODE_SCHEDULE_TIME_FAILDED,
+        });
+      }
+    } catch (error) {
+      console.log(actionTypes.FETCH_ALLCODE_SCHEDULE_TIME_FAILDED, error);
+      dispatch({
+        type: actionTypes.FETCH_ALLCODE_SCHEDULE_TIME_FAILDED,
+      });
+    }
+  };
+};

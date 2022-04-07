@@ -37,6 +37,9 @@
             "manage-handbook":"Manage Handbook"
         }
     },
+    "doctor":{
+        "manage-schedule":"Manage Doctor's schedule"
+    },
     "manege-user":{
         "add": "Add a new user",
         "email":"Email",
@@ -51,7 +54,20 @@
         "save": "Save user",
         "image": "Avatar",
         "edit":"edit user"
+    },
+    "homepage":{
+        "outstading-doctor":"Last week's featured doctor",
+        "more-infor":"More Infor"
+    },
+
+    "manage-schedule":{
+        "title":"Manage doctor's examination plan",
+        "choose-doctor":"Choose doctor",
+        "choose-date":"Choose date",
+        "save":"Save infor"
     }
+   
+  
 
  
 }
