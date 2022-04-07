@@ -3,6 +3,7 @@ import { connect } from "react-redux";
 import HomeHeader from "../../HomePage/HomeHeader";
 import "./DetailDoctor.scss";
 import { getDetailInforDoctor } from "../../../services/userService";
+import DoctorSchedule from "./DoctorSchedule";
 class DetaiDoctor extends Component {
   constructor(props) {
     super(props);
@@ -65,7 +66,15 @@ class DetaiDoctor extends Component {
               </div>
             </div>
           </div>
-          <div className="schedule-doctor"></div>
+          <div className="schedule-doctor">
+            <div className="content-left">
+              <DoctorSchedule
+                doctorIdFromParent={
+                  detailDoctor && detailDoctor.id ? detailDoctor.id : -1
+                }
+              />
+            </div>
+          </div>
           <div className="detail-infor-doctor">
             {detailDoctor &&
               detailDoctor.Markdown &&
