@@ -4,11 +4,13 @@ import HomeHeader from "../../HomePage/HomeHeader";
 import "./DetailDoctor.scss";
 import { getDetailInforDoctor } from "../../../services/userService";
 import DoctorSchedule from "./DoctorSchedule";
+import { convertTypeAcquisitionFromJson } from "typescript";
 class DetaiDoctor extends Component {
   constructor(props) {
     super(props);
     this.state = {
       detailDoctor: {},
+      currentDoctorId: -1,
     };
   }
 
@@ -22,8 +24,14 @@ class DetaiDoctor extends Component {
       let res = await getDetailInforDoctor(id);
       if (res && res.errCode === 0) {
         this.setState({
-          detailDoctor: res.data,
+          currentDoctorId: id,
         });
+        let res = await getDetailInforDoctor(id);
+        if (res && res.errCode === 0) {
+          this.setState({
+            detailDoctor: res.data,
+          });
+        }
       }
     }
   }
@@ -32,7 +40,6 @@ class DetaiDoctor extends Component {
   render() {
     let { detailDoctor } = this.state;
 
-    console.log(detailDoctor);
     return (
       <>
         <div>
@@ -68,11 +75,7 @@ class DetaiDoctor extends Component {
           </div>
           <div className="schedule-doctor">
             <div className="content-left">
-              <DoctorSchedule
-                doctorIdFromParent={
-                  detailDoctor && detailDoctor.id ? detailDoctor.id : -1
-                }
-              />
+              <DoctorSchedule doctorIdFromParent={this.state.currentDoctorId} />
             </div>
           </div>
           <div className="detail-infor-doctor">
