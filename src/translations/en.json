@@ -35,10 +35,10 @@
             "manage-specialty":"Manage specialty",
             "handbook":"Handbook",
             "manage-handbook":"Manage Handbook"
+        },
+        "doctor":{
+            "manage-schedule":"Manage Doctor's schedule"
         }
-    },
-    "doctor":{
-        "manage-schedule":"Manage Doctor's schedule"
     },
     "manege-user":{
         "add": "Add a new user",
@@ -73,7 +73,23 @@
             "choose":"Choose",
             "book-free":"and book (free)"
         }
+    },
+    "admin":{
+        "manage-doctor":{
+            "title":"Create more information",
+            "select-doctor":"Select doctor",
+            "intro":"Introduction",
+            "add":"Create infor",
+            "save":"Save infor",
+            "price":"price",
+            "payment":"payment",
+            "province":"province",
+            "nameClinic":"Name Clinic",
+            "addressClinic":"Address Clinic",
+            "note":"Note"
+        }
     }
+
    
   
 

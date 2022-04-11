@@ -4,7 +4,8 @@ import HomeHeader from "../../HomePage/HomeHeader";
 import "./DetailDoctor.scss";
 import { getDetailInforDoctor } from "../../../services/userService";
 import DoctorSchedule from "./DoctorSchedule";
-import { convertTypeAcquisitionFromJson } from "typescript";
+import DoctorExtraInfor from "./DoctorExtraInfor";
+
 class DetaiDoctor extends Component {
   constructor(props) {
     super(props);
@@ -77,12 +78,22 @@ class DetaiDoctor extends Component {
             <div className="content-left">
               <DoctorSchedule doctorIdFromParent={this.state.currentDoctorId} />
             </div>
+            <div className="content-right">
+              <DoctorExtraInfor
+                doctorIdFromParent={this.state.currentDoctorId}
+              />
+            </div>
           </div>
+
           <div className="detail-infor-doctor">
             {detailDoctor &&
               detailDoctor.Markdown &&
               detailDoctor.Markdown.contentHTML && (
-                <div>{detailDoctor.Markdown.contentHTML}</div>
+                <div
+                  dangerouslySetInnerHTML={{
+                    __html: detailDoctor.Markdown.contentHTML,
+                  }}
+                ></div>
               )}
           </div>
           <div className="comment-doctor"></div>
@@ -93,7 +104,9 @@ class DetaiDoctor extends Component {
 }
 
 const mapStateToProps = (state) => {
-  return {};
+  return {
+    language: state.app.language,
+  };
 };
 
 const mapDispatchToProps = (dispatch) => {

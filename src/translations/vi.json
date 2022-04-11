@@ -36,10 +36,10 @@
             "manage-specialty":"Quản lý chuyên khoa",
             "handbook":"Cẩm nan",
             "manage-handbook":"Quản lí cẩm nan"
+        },
+        "doctor":{
+            "manage-schedule":"Quản lý kế hoạch khám bệnh"
         }
-    },
-    "doctor":{
-        "manage-schedule":"Quản lý kế hoạch khám bệnh"
     },
     "manege-user":{
         "add": "Thêm mới người dùng ",
@@ -73,7 +73,23 @@
             "choose":"chọn",
             "book-free":"và đặt (miễn phí)"
         }
+       },
+       "admin":{
+           "manage-doctor":{
+               "title":"Tạo thêm thông tin bác sĩ",
+               "select-doctor":"Chọn bác sĩ",
+               "intro":"Thông tin giới thiệu",
+               "add":"Tạo thông tin",
+               "save":"Lưu thông tin",
+               "price":"Giá khám bệnh",
+               "payment":"Phương thức thanh toán",
+               "province":"Tỉnh thành",
+               "nameClinic":"Tên phòng khám",
+               "addressClinic":"Địa chỉ phòng khám",
+               "note":"Ghi chú"
+           }
        }
     
    
 }
+
