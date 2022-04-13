@@ -5,12 +5,15 @@ import moment from "moment";
 import { LANGUAGES } from "../../../utils";
 import { getScheduleDoctorByDate } from "../../../services/userService";
 import { FormattedMessage } from "react-intl";
+import BookingModal from "./Modal/BookingModal.js";
 class DoctorSchedule extends Component {
   constructor(props) {
     super(props);
     this.state = {
       allDays: {},
       allAvalableTime: [],
+      isOpenModalBooking: false,
+      dataScheduleTimeModal: {},
     };
   }
 
@@ -74,6 +77,7 @@ class DoctorSchedule extends Component {
       });
     }
   }
+
   handleOnChageSelect = async (event) => {
     if (this.props.doctorIdFromParent && this.props.doctorIdFromParent !== -1) {
       let doctorId = this.props.doctorIdFromParent;
@@ -86,8 +90,26 @@ class DoctorSchedule extends Component {
       }
     }
   };
+
+  handleClickScheduleTime = (time) => {
+    console.log(time, "time");
+    this.setState({
+      isOpenModalBooking: true,
+      dataScheduleTimeModal: time,
+    });
+  };
+  closeBookingClose = () => {
+    this.setState({
+      isOpenModalBooking: false,
+    });
+  };
   render() {
-    let { allDays, allAvalableTime } = this.state;
+    let {
+      allDays,
+      allAvalableTime,
+      isOpenModalBooking,
+      dataScheduleTimeModal,
+    } = this.state;
     let { language } = this.props;
 
     return (
@@ -129,6 +151,7 @@ class DoctorSchedule extends Component {
                           className={
                             language === LANGUAGES.VI ? "btn-vie" : "btn-en"
                           }
+                          onClick={() => this.handleClickScheduleTime(item)}
                         >
                           {timeDisplay}
                         </button>
@@ -138,7 +161,7 @@ class DoctorSchedule extends Component {
                   <div className="book-free">
                     <span>
                       <FormattedMessage id="patient.detail-doctor.choose" />
-                      <i class="far fa-hand-poin-up"></i>
+                      <i className="far fa-hand-poin-up"></i>
                       <FormattedMessage id="patient.detail-doctor.book-free" />
                     </span>
                   </div>
@@ -151,6 +174,11 @@ class DoctorSchedule extends Component {
             </div>
           </div>
         </div>
+        <BookingModal
+          isOpenModal={isOpenModalBooking}
+          closeBookingClose={this.closeBookingClose}
+          dataTime={dataScheduleTimeModal}
+        />
       </>
     );
   }

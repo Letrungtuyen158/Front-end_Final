@@ -79,6 +79,20 @@
             "detail":"Xem chi tiết",
             "payment": " Người bệnh có thể trả theo hình thức: ",
             "hide-price":"Ẩn bảng giá"
+        },
+        "booking-modal":{
+            "title":"Thong tin dat lich kham benh",
+            "fullName":"Ho va ten",
+            "phoneNumber":"so dien thoai",
+            "email":"dia chi email",
+            "address":"dia chi lien lac",
+            "reason":"ly do kham",
+            "birthday":"Ngay sinh",
+            "gender":"Gioi tinh",
+            "btnConfirm":"Xac nhan",
+            "btnCancel":"Huy",
+            "priceBooking":"Mien phi dat lich",
+            "price":"gia kham"
         }
        },
        "admin":{

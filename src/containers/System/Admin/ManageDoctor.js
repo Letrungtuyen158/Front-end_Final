@@ -148,13 +148,13 @@ class ManageDoctor extends Component {
     let { hasOldData } = this.state;
 
     this.props.saveDetailDoctor({
-      contentHTML: this.state.contentHTML,
+      contentHTML: this.state?.contentHTML,
       contentMarkdown: this.state.contentMarkdown,
       description: this.state.description,
       doctorId: this.state.selectedOption.value,
       action: hasOldData === true ? CRUD_ACTION.EDIT : CRUD_ACTION.CREATE,
 
-      selectedPrice: this.state.selectedPrice.value,
+      selectedPrice: this.state.selectedPrice?.value,
       selectedPayment: this.state.selectedPayment.value,
       selectProvince: this.state.selectProvince.value,
       nameClinic: this.state.nameClinic,
@@ -354,7 +354,14 @@ class ManageDoctor extends Component {
             value={this.state.contentMarkdown}
           />
         </div>
-        <button onClick={this.hanleSaveContentMarkdown}>
+        <button
+          onClick={() => this.hanleSaveContentMarkdown()}
+          className={
+            hasOldData === true
+              ? "save-content-doctor"
+              : "create-content-doctor"
+          }
+        >
           {hasOldData === true ? (
             <span>
               <FormattedMessage id="admin.manage-doctor.save" />

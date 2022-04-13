@@ -40,7 +40,6 @@ class DetaiDoctor extends Component {
   componentDidUpdate(prevProps, preState, snapshot) {}
   render() {
     let { detailDoctor } = this.state;
-
     return (
       <>
         <div>
