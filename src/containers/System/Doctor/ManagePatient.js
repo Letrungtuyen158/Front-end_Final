@@ -26,7 +26,6 @@ class ManagePatient extends Component {
   getDataPatient = async (user, formatedDate) => {
     let res = await getAllPatientForDoctor({
       doctorId: user.id,
-      date: formatedDate,
     });
     console.log(res, "res");
     if (res && res.errCode === 0) {

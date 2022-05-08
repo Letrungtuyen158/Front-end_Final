@@ -6,6 +6,7 @@ import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import { getAllSpecialty } from "../../../services/userService";
+import { withRouter } from "react-router";
 
 class Specialty extends Component {
   constructor(props) {
@@ -14,7 +15,11 @@ class Specialty extends Component {
       dataSpecialty: [],
     };
   }
-
+  handleViewDetailSpecialty = (item) => {
+    if (this.props.history) {
+      this.props.history.push(`/detail-specialty/${item.id}`);
+    }
+  };
   async componentDidMount() {
     let res = await getAllSpecialty();
     if (res && res.errCode === 0) {
@@ -55,6 +60,7 @@ class Specialty extends Component {
                       <div
                         className="bg-image"
                         style={{ backgroundImage: `url(${item.image})` }}
+                        onClick={() => this.handleViewDetailSpecialty(item)}
                       />
                       <div className="specialty-name">{item.name}</div>
                     </div>
@@ -79,4 +85,6 @@ const mapDispatchToProps = (dispatch) => {
   return {};
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(Specialty);
+export default withRouter(
+  connect(mapStateToProps, mapDispatchToProps)(Specialty)
+);
