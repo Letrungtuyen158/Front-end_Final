@@ -40,16 +40,23 @@
         .specialty-body {
 
             .specialty-customize {
+                cursor: pointer;
                 .bg-image {
                     width              : 95%;
                     height             : 200px;
-                    background         : url('../../../assets/specialty/co-xuong-khop.jpg');
+                    // background         : url('../../../assets/specialty/co-xuong-khop.jpg');
                     background-position: center center;
                     background-repeat  : no-repeat;
-                    background-size    : cover;
+                    background-size    :contain;
                     background-color   : #eee;
-                    margin-bottom: 10px;
                     border: 3px solid #f7d800;
+                }
+                .specialty-name{
+                    padding: 10px 0;
+                    font-size: 20px;
+                    &:hover{
+                        color:blue
+                    }
                 }
             }
         }

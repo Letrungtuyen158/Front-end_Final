@@ -38,7 +38,8 @@
             "manage-handbook":"Quản lí cẩm nan"
         },
         "doctor":{
-            "manage-schedule":"Quản lý kế hoạch khám bệnh"
+            "manage-schedule":"Quản lý kế hoạch khám bệnh",
+            "manage-patient":"Quan ly benh nhan kham benh"
         }
     },
     "manege-user":{
@@ -58,6 +59,7 @@
     },
     "homepage":{
         "outstanding-doctor":"Bacs sĩ nổi bật tuần qua",
+        "specialty-poplular":"Chuyên khoa phổ biến",
         "more-infor":"xem thêm"
     },
     "manage-schedule":{

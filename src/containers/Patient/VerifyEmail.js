@@ -39,7 +39,6 @@ class VerifyEmail extends Component {
   componentDidUpdate(prevProps, preState, snapshot) {}
   render() {
     let { statusVerify, errCode } = this.state;
-    console.log(statusVerify, errCode, "hihi");
     return (
       <>
         <HomeHeader />
@@ -54,7 +53,7 @@ class VerifyEmail extends Component {
                 </div>
               ) : (
                 <div className="infor-booking">
-                  Lịch hẹn không tồn tại hoặc đã được xác nhận !
+                  Xác nhận lịch hẹn thành công
                 </div>
               )}
             </div>
