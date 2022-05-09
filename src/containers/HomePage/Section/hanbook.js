@@ -26,27 +26,27 @@ class Hanbook extends Component {
             <Slider {...settings}>
               <div className="Hanbook-customize">
                 <div className="bg-image" />
-                <h4>Bệnh viện đà nẵng</h4>
+                <h4>cẩm nang 1</h4>
               </div>
               <div className="Hanbook-customize">
                 <div className="bg-image" />
-                <h4>Bệnh viên hữu nghị việt đức</h4>
+                <h4>cẩm nang 2</h4>
               </div>
               <div className="Hanbook-customize">
                 <div className="bg-image" />
-                <h4>Bệnh viện FPT</h4>
+                <h4>cẩm nang 3</h4>
               </div>
               <div className="Hanbook-customize">
                 <div className="bg-image" />
-                <h4>Bệnh viện y học dược1</h4>
+                <h4>cẩm nang 4</h4>
               </div>
               <div className="Hanbook-customize">
                 <div className="bg-image" />
-                <h4>Bệnh viện U bướu</h4>
+                <h4>cẩm nang 5</h4>
               </div>
               <div className="Hanbook-customize">
                 <div className="bg-image" />
-                <h4>Bệnh viện sản nhi</h4>
+                <h4>cẩm nang 6</h4>
               </div>
             </Slider>
           </div>

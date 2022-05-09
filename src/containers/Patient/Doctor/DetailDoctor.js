@@ -5,6 +5,8 @@ import "./DetailDoctor.scss";
 import { getDetailInforDoctor } from "../../../services/userService";
 import DoctorSchedule from "./DoctorSchedule";
 import DoctorExtraInfor from "./DoctorExtraInfor";
+import LikeAndShare from "../SocialPlugin/LikeAndShare";
+import Comment from "../SocialPlugin/Comment";
 
 class DetaiDoctor extends Component {
   constructor(props) {
@@ -40,6 +42,10 @@ class DetaiDoctor extends Component {
   componentDidUpdate(prevProps, preState, snapshot) {}
   render() {
     let { detailDoctor } = this.state;
+    let currentURL =
+      process.env.REACT_APP_IS_LOCALHOST === 1
+        ? "https://developers.facebook.com/docs/plugins/like-button/"
+        : window.location.href;
     return (
       <>
         <div>
@@ -70,6 +76,9 @@ class DetaiDoctor extends Component {
                       }}
                     ></div>
                   )}
+                <div className="like-share-plugin">
+                  <LikeAndShare dataHref={currentURL} />
+                </div>
               </div>
             </div>
           </div>
@@ -95,7 +104,9 @@ class DetaiDoctor extends Component {
                 ></div>
               )}
           </div>
-          <div className="comment-doctor"></div>
+          <div className="comment-doctor">
+            <Comment dataHref={currentURL} width={"100%"} />
+          </div>
         </div>
       </>
     );
